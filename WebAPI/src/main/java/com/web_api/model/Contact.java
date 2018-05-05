@@ -66,14 +66,6 @@ public class Contact {
 		this.lastName = lastName;
 	}
 
-	public String getFullName() {
-		return fullName;
-	}
-
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
-
 	public String getAddress() {
 		return address;
 	}
@@ -96,6 +88,14 @@ public class Contact {
 
 	public void setMobileNumber(BigInteger mobileNumber) {
 		this.mobileNumber = mobileNumber;
+	}
+	
+	public String getFullName() {
+		return fullName;
+	}
+	
+	public void setFullName() {
+		this.fullName = firstName+" "+lastName;
 	}
 	
 }

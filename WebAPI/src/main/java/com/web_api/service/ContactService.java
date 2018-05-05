@@ -15,7 +15,7 @@ public interface ContactService {
 	
 	Page<Contact> getAllContact(Pageable pageable);
 	
-	void saveUser(Contact employee);
+	void saveContact(Contact employee);
 	
 	void updateContact(Contact employee);
 }

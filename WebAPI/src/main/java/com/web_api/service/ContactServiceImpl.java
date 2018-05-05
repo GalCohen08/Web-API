@@ -35,7 +35,7 @@ public class ContactServiceImpl implements ContactService{
 	}
 
 	@Override
-	public void saveUser(Contact employee) {
+	public void saveContact(Contact employee) {
 		contactRepository.save(employee);
 		
 	}
