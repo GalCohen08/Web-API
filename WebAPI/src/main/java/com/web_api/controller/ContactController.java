@@ -20,8 +20,15 @@ import com.web_api.repository.ContactRepository;
 import com.web_api.service.ContactService;
 import com.web_api.utils.CustomErrorType;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
+
 @RestController
 @RequestMapping("/api") 
+@Api(value="Employee CRUD for managing contacts", tags ="Operations pertaining to products")
 public class ContactController {
 	public static final Logger logger = LoggerFactory.getLogger(ContactController.class);
 	
@@ -32,11 +39,27 @@ public class ContactController {
 	@Autowired
 	private ContactRepository contactRepository;
 	
+	@ApiOperation(value = "View all available Contacts", response = Page.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Successfully retrieved Contacts list"),
+			@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+		    @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+		    @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+	}
+	)
 	@RequestMapping(value = "/contact/", method = RequestMethod.GET)
-	public Page<Contact> getEmployees(Pageable pageable){
+	public Page<Contact> getContactsList(Pageable pageable){
 		return contactService.getAllContact(pageable);
 	}
 	
+	@ApiOperation(value = "Uses ID to find contact, View contact content", response = Contact.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Successfully found Contact"),
+			@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+		    @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+		    @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+	}
+	)
 	@RequestMapping(value = "/contact/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getContact(@PathVariable("id") long id){
 		logger.info("Fetching Employee with id {}", id);
@@ -48,6 +71,12 @@ public class ContactController {
 		return new ResponseEntity<Contact>(contact, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "Delete the contact")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Contact deleted Successfully"),
+			@ApiResponse(code = 401, message = "You are not authorized to delete the resource"),
+	}
+	)
 	@RequestMapping(value = "/contact/{id}",method = RequestMethod.DELETE)
 	public ResponseEntity<?> deleteContact(@PathVariable("id") long id){
 		logger.info("Fetching & Deleting User with id {}", id);
@@ -60,6 +89,12 @@ public class ContactController {
 		return new ResponseEntity<Contact>(HttpStatus.NO_CONTENT);
 	}
 	
+	@ApiOperation(value = "Creates new contact",notes = "Contact contains ,firstName, lastName, fullName, address, eMaill, mobileNumber")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Contact Has been Successfully created"),
+		    @ApiResponse(code = 404, message = "Failed to create a new contact")
+	}
+	)
 	@RequestMapping(value = "/contact/", method = RequestMethod.POST)
 	public ResponseEntity<?> createContact(@RequestBody Contact contact, UriComponentsBuilder ucBuilder){
 		logger.info("Creating Employee: {}",contact);
@@ -69,6 +104,13 @@ public class ContactController {
 		return new ResponseEntity<String>(headers,HttpStatus.CREATED);	
 	}
 	
+	@ApiOperation(value = "Update a Contact", notes ="Updates the contact fields, (one field or more)",response = Page.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Contact has been updated uccessfully"),
+			@ApiResponse(code = 401, message = "You are not authorized to updated this Contact"),
+		    @ApiResponse(code = 404, message = "The Contact you are trying to Update is not found")
+	}
+	)
     @RequestMapping(value = "/contact/{id}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateContact(@PathVariable("id") long id, @RequestBody Contact contact) {
         logger.info("Updating Contact with id {}", id);

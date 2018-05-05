@@ -8,24 +8,27 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 @Table(name = "contact")
 public class Contact {
 	@Id 
 	@GeneratedValue
 	@Column(name = "contact_id")
+	@ApiModelProperty(notes = "The database generated product ID")
 	private Long id;
-	
+	@ApiModelProperty(notes = "Contact first name")
 	private String firstName;
-	
+	@ApiModelProperty(notes = "Contact last name")
 	private String lastName;
-	
+	@ApiModelProperty(notes = "Contact fullName, (firstName+lastName)")
 	private String fullName;
-	
+	@ApiModelProperty(notes = "Contact address")
 	private String address;
-	
+	@ApiModelProperty(notes = "Contact E-Maill")
 	private String eMaill;
-	
+	@ApiModelProperty(notes = "Contact Mobile Phone Number")
 	private String  mobileNumber;
 	
 	public Contact() {
