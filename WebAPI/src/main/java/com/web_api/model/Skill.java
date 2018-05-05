@@ -12,6 +12,8 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.Enumerated;
 
 @Entity
@@ -21,16 +23,18 @@ public class Skill {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "skill_id")
+	@ApiModelProperty(notes = "The database generated skill ID")
 	private long id;
-	
+	@ApiModelProperty(notes = "Skill name")
 	private String name;
-	
+	@ApiModelProperty(notes = "Skill Level:{JUNIOR, INTERMEDIATE, SENIOR}")
 	@Enumerated(EnumType.STRING)
 	private Level level;
 	
 	@ManyToOne
 	@JoinColumn (name="contact_id")
 	@JsonBackReference
+	@ApiModelProperty(notes = "The Contact that is related to this skill")
 	private Contact contact;
 	
 	public Skill() {

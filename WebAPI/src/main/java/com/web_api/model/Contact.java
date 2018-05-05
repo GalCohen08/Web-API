@@ -19,7 +19,7 @@ public class Contact {
 	@Id 
 	@GeneratedValue
 	@Column(name = "contact_id")
-	@ApiModelProperty(notes = "The database generated product ID")
+	@ApiModelProperty(notes = "The database generated contact ID")
 	private Long id;
 	@ApiModelProperty(notes = "Contact first name")
 	private String firstName;
