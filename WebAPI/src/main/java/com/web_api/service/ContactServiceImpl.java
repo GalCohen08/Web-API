@@ -39,7 +39,7 @@ public class ContactServiceImpl implements ContactService{
 
 	@Override
 	public void saveUser(Contact employee) {
-		// TODO Auto-generated method stub
+		contactRepository.save(employee);
 		
 	}
 
