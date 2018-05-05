@@ -1,4 +1,4 @@
-package com.WebAPI.swagger;
+package com.web_api.swagger;
 
 import org.springframework.context.annotation.Bean;
 
