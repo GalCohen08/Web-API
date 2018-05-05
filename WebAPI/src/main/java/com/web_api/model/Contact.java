@@ -26,13 +26,13 @@ public class Contact {
 	
 	private String eMaill;
 	
-	private BigInteger  mobileNumber;
+	private String  mobileNumber;
 	
 	public Contact() {
 		super();
 	}
 	
-	public Contact(String name, String lastName, String address, String eMaill, BigInteger mobileNumber, boolean active) {
+	public Contact(String name, String lastName, String address, String eMaill, String  mobileNumbere) {
 		super();
 		this.firstName = name;
 		this.lastName = lastName;
@@ -82,11 +82,11 @@ public class Contact {
 		this.eMaill = eMaill;
 	}
 
-	public BigInteger getMobileNumber() {
+	public String getMobileNumber() {
 		return mobileNumber;
 	}
 
-	public void setMobileNumber(BigInteger mobileNumber) {
+	public void setMobileNumber(String mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
 	

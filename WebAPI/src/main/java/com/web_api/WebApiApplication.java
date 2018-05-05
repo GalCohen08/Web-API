@@ -22,10 +22,10 @@ public class WebApiApplication {
 	@Bean
 	public CommandLineRunner setup(ContactRepository contactRepository){
 		return (args) -> {
-			contactRepository.save(new Contact("Gustavo", "Ponce", "Basel","1@1",new BigInteger("0792880360") ,true));
-			contactRepository.save(new Contact("John", "Smith","2@1","Zurich",new BigInteger("0792880361"), true));
-			contactRepository.save(new Contact("Jim ", "Morrison","3@1","Schmitten",new BigInteger("0792880332"), false));
-			contactRepository.save(new Contact("David", "Gilmour","4@1","Bern",new BigInteger("0792880361"), true));
+			contactRepository.save(new Contact("Gustavo", "Ponce", "Basel","1@1","0792880361"));
+			contactRepository.save(new Contact("John", "Smith","2@1","Zurich","0792880361"));
+			contactRepository.save(new Contact("Jim ", "Morrison","3@1","Schmitten","0792880332"));
+			contactRepository.save(new Contact("David", "Gilmour","4@1","Bern","0792880361"));
 			logger.info("The sample data has been generated");
 		};
 	}
