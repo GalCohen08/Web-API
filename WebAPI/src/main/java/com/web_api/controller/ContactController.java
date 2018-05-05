@@ -28,7 +28,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/api") 
-@Api(value="Employee CRUD for managing contacts", tags ="Operations pertaining to products")
+@Api(value="CRUD for managing contacts", tags ="Operations pertaining to contacts")
 public class ContactController {
 	public static final Logger logger = LoggerFactory.getLogger(ContactController.class);
 	
@@ -44,7 +44,7 @@ public class ContactController {
 			@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
 		    @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
 		    @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
-	}
+		}
 	)
 	@RequestMapping(value = "/contact/", method = RequestMethod.GET)
 	public Page<Contact> getContactsList(Pageable pageable){
@@ -57,7 +57,7 @@ public class ContactController {
 			@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
 		    @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
 		    @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
-	}
+		}
 	)
 	
 	@RequestMapping(value = "/contact/{id}", method = RequestMethod.GET)
@@ -75,7 +75,7 @@ public class ContactController {
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Contact deleted Successfully"),
 			@ApiResponse(code = 401, message = "You are not authorized to delete the resource"),
-	}
+		}
 	)
 	@RequestMapping(value = "/contact/{id}",method = RequestMethod.DELETE)
 	public ResponseEntity<?> deleteContact(@PathVariable("id") long id){
@@ -94,7 +94,7 @@ public class ContactController {
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Contact Has been Successfully created"),
 		    @ApiResponse(code = 404, message = "Failed to create a new contact")
-	}
+		}
 	)
 	@RequestMapping(value = "/contact/", method = RequestMethod.POST)
 	public ResponseEntity<?> createContact(@RequestBody Contact contact, UriComponentsBuilder ucBuilder){
@@ -110,13 +110,11 @@ public class ContactController {
 			@ApiResponse(code = 200, message = "Contact has been updated uccessfully"),
 			@ApiResponse(code = 401, message = "You are not authorized to updated this Contact"),
 		    @ApiResponse(code = 404, message = "The Contact you are trying to Update is not found")
-	}
+		}
 	)
-	
     @RequestMapping(value = "/contact/{id}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateContact(@PathVariable("id") long id, @RequestBody Contact contact) {
         logger.info("Updating Contact with id {}", id);
- 
         Contact currentContact = contactService.getContactById(id);
         if (currentContact == null) {
             logger.error("Unable to update. Contact with id {} not found.", id);
@@ -125,15 +123,20 @@ public class ContactController {
         }
         if(contact.getAddress() != null){
         	currentContact.setAddress(contact.getAddress());
-        }if(contact.geteMaill() != null){
+        }
+        if(contact.geteMaill() != null){
         	currentContact.seteMaill(contact.geteMaill());
-        }if(contact.getFirstName() !=null){
+        }
+        if(contact.getFirstName() !=null){
         	currentContact.setFirstName(contact.getFirstName());
-        }if(contact.getLastName() != null){
+        }
+        if(contact.getLastName() != null){
         	currentContact.setLastName(contact.getLastName());
-        }if(contact.getFirstName() !=null|| contact.getLastName() !=null){
+        }
+        if(contact.getFirstName() !=null|| contact.getLastName() !=null){
         	currentContact.setFullName();
-        }if(contact.getMobileNumber() != null){
+        }
+        if(contact.getMobileNumber() != null){
         	currentContact.setMobileNumber(contact.getMobileNumber());
         }
         contactService.updateContact(currentContact);
