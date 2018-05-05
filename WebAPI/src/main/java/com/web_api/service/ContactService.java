@@ -6,13 +6,13 @@ import com.web_api.model.Contact;
 
 public interface ContactService {
 	
-	Contact getEmployeeById(long id);
+	Contact getContactById(long id);
 	
-	void deleteEmployeeByid(long id);
+	void deleteContactByid(long id);
 	
-	List<Contact> getAllEmployees();
+	List<Contact> getAllContact();
 	
 	void saveUser(Contact employee);
 	
-	void updateEmplyee(Contact employee);
+	void updateContact(Contact employee);
 }
