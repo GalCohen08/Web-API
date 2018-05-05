@@ -35,7 +35,7 @@ public class Contact {
 		super();
 	}
 	
-	public Contact(String name, String lastName, String address, String eMaill, String  mobileNumbere) {
+	public Contact(String name, String lastName, String address, String eMaill, String  mobileNumber) {
 		super();
 		this.firstName = name;
 		this.lastName = lastName;
