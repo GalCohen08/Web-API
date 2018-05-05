@@ -28,7 +28,7 @@ public class ContactServiceImpl implements ContactService{
 
 	@Override
 	public void deleteContactByid(long id) {
-		// TODO Auto-generated method stub
+		contactRepository.deleteById(id);
 		
 	}
 
