@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.web_api.model.Contact;
-import com.web_api.repository.ContactRepository;
+import com.web_api.repository.SkillRepository;
 import com.web_api.service.ContactService;
 import com.web_api.utils.CustomErrorType;
 
@@ -35,9 +35,8 @@ public class ContactController {
 	@Autowired
 	private ContactService contactService;
 	
-	
 	@Autowired
-	private ContactRepository contactRepository;
+	private SkillRepository skillRepository;
 	
 	@ApiOperation(value = "View all available Contacts", response = Page.class)
 	@ApiResponses(value = {
@@ -60,6 +59,7 @@ public class ContactController {
 		    @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
 	}
 	)
+	
 	@RequestMapping(value = "/contact/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getContact(@PathVariable("id") long id){
 		logger.info("Fetching Employee with id {}", id);
@@ -85,6 +85,7 @@ public class ContactController {
 			logger.error("Unable to delete. Contact with id {} not found.", id);
 			return new ResponseEntity<>(new CustomErrorType("Unable to delete. Contact with id " + id + " not found."),HttpStatus.NOT_FOUND);
 		}	
+		skillRepository.deleteAll(contact.getSkills());
 		contactService.deleteContactByid(id);
 		return new ResponseEntity<Contact>(HttpStatus.NO_CONTENT);
 	}
@@ -111,6 +112,7 @@ public class ContactController {
 		    @ApiResponse(code = 404, message = "The Contact you are trying to Update is not found")
 	}
 	)
+	
     @RequestMapping(value = "/contact/{id}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateContact(@PathVariable("id") long id, @RequestBody Contact contact) {
         logger.info("Updating Contact with id {}", id);
