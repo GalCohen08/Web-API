@@ -2,6 +2,9 @@ package com.web_api.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.web_api.model.Contact;
 
 public interface ContactService {
@@ -10,7 +13,7 @@ public interface ContactService {
 	
 	void deleteContactByid(long id);
 	
-	List<Contact> getAllContact();
+	Page<Contact> getAllContact(Pageable pageable);
 	
 	void saveUser(Contact employee);
 	

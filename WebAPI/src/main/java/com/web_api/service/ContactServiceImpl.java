@@ -3,6 +3,8 @@ package com.web_api.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.web_api.model.Contact;
@@ -33,11 +35,6 @@ public class ContactServiceImpl implements ContactService{
 	}
 
 	@Override
-	public List<Contact> getAllContact() {
-		return contactRepository.findAll();
-	}
-
-	@Override
 	public void saveUser(Contact employee) {
 		contactRepository.save(employee);
 		
@@ -47,6 +44,11 @@ public class ContactServiceImpl implements ContactService{
 	public void updateContact(Contact employee) {
 		contactRepository.save(employee);	
 		
+	}
+
+	@Override
+	public Page<Contact> getAllContact(Pageable pageable) {
+		return contactRepository.findAll(pageable);
 	} 
 	
 
