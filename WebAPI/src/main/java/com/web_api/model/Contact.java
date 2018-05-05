@@ -1,6 +1,5 @@
 package com.web_api.model;
 
-import java.math.BigInteger;
 import java.util.HashSet;
 import java.util.Set;
 
