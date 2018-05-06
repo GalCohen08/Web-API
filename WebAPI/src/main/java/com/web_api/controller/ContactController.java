@@ -1,5 +1,7 @@
 package com.web_api.controller;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,7 +99,7 @@ public class ContactController {
 		}
 	)
 	@RequestMapping(value = "/contact/", method = RequestMethod.POST)
-	public ResponseEntity<?> createContact(@RequestBody Contact contact, UriComponentsBuilder ucBuilder){
+	public ResponseEntity<?> createContact(@Valid @RequestBody Contact contact, UriComponentsBuilder ucBuilder){
 		logger.info("Creating Employee: {}",contact);
 		contactService.saveContact(contact);
 		HttpHeaders headers = new HttpHeaders();
@@ -113,7 +115,7 @@ public class ContactController {
 		}
 	)
     @RequestMapping(value = "/contact/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<?> updateContact(@PathVariable("id") long id, @RequestBody Contact contact) {
+    public ResponseEntity<?> updateContact(@PathVariable("id") long id,@Valid @RequestBody Contact contact) {
         logger.info("Updating Contact with id {}", id);
         Contact currentContact = contactService.getContactById(id);
         if (currentContact == null) {
