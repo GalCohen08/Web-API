@@ -1,11 +1,13 @@
 package com.web_api.model;
 
-import java.math.BigInteger;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -16,7 +18,7 @@ public class Contact {
 	@Id 
 	@GeneratedValue
 	@Column(name = "contact_id")
-	@ApiModelProperty(notes = "The database generated product ID")
+	@ApiModelProperty(notes = "The database generated contact ID")
 	private Long id;
 	@ApiModelProperty(notes = "Contact first name")
 	private String firstName;
@@ -30,6 +32,9 @@ public class Contact {
 	private String eMaill;
 	@ApiModelProperty(notes = "Contact Mobile Phone Number")
 	private String  mobileNumber;
+	@ApiModelProperty(notes = "Contact skills [name:String, Level:{JUNIOR,INTERMEDIATE, SENIOR}]")
+	@OneToMany(mappedBy = "contact")
+	private Set<Skill> skills = new HashSet<Skill>();
 	
 	public Contact() {
 		super();
@@ -99,6 +104,14 @@ public class Contact {
 	
 	public void setFullName() {
 		this.fullName = firstName+" "+lastName;
+	}
+	
+	public Set<Skill> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(Set<Skill> skills) {
+		this.skills = skills;
 	}
 	
 }

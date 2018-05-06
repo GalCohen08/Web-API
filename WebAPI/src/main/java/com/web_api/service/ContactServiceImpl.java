@@ -1,7 +1,5 @@
 package com.web_api.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,7 +10,7 @@ import com.web_api.repository.ContactRepository;
 
 import javassist.NotFoundException;
 
-@Service("employeeService")
+@Service("ContactService")
 public class ContactServiceImpl implements ContactService{
 	
 	@Autowired
@@ -35,14 +33,14 @@ public class ContactServiceImpl implements ContactService{
 	}
 
 	@Override
-	public void saveContact(Contact employee) {
-		contactRepository.save(employee);
+	public void saveContact(Contact contact) {
+		contactRepository.save(contact);
 		
 	}
 
 	@Override
-	public void updateContact(Contact employee) {
-		contactRepository.save(employee);	
+	public void updateContact(Contact contact) {
+		contactRepository.save(contact);	
 		
 	}
 

@@ -1,7 +1,5 @@
 package com.web_api.service;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -15,7 +13,7 @@ public interface ContactService {
 	
 	Page<Contact> getAllContact(Pageable pageable);
 	
-	void saveContact(Contact employee);
+	void saveContact(Contact contact);
 	
-	void updateContact(Contact employee);
+	void updateContact(Contact contact);
 }

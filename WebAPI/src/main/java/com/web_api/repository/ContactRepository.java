@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.web_api.model.Contact;
 
-@Repository("employeeRepository")
+@Repository("contactRepository")
 public interface ContactRepository extends JpaRepository<Contact, Long>{
 
 }
