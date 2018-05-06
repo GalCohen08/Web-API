@@ -9,6 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 import io.swagger.annotations.ApiModelProperty;
 
@@ -20,17 +23,25 @@ public class Contact {
 	@Column(name = "contact_id")
 	@ApiModelProperty(notes = "The database generated contact ID")
 	private Long id;
+	
 	@ApiModelProperty(notes = "Contact first name")
+	@NotEmpty(message = "first name must not be empty")
 	private String firstName;
 	@ApiModelProperty(notes = "Contact last name")
+	@NotEmpty(message = "last name must not be empty")
 	private String lastName;
 	@ApiModelProperty(notes = "Contact fullName, (firstName+lastName)")
 	private String fullName;
 	@ApiModelProperty(notes = "Contact address")
 	private String address;
+	
 	@ApiModelProperty(notes = "Contact E-Maill")
+    @NotEmpty(message = "email must not be empty")
+    @Email(message = "email should be a valid email")
 	private String eMaill;
+	
 	@ApiModelProperty(notes = "Contact Mobile Phone Number")
+	@Pattern(regexp="(^$|[0-9]{10})",message = "Mobile Phone must be valid (10 digits)")
 	private String  mobileNumber;
 	@ApiModelProperty(notes = "Contact skills [name:String, Level:{JUNIOR,INTERMEDIATE, SENIOR}]")
 	@OneToMany(mappedBy = "contact")
