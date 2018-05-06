@@ -16,8 +16,8 @@ public class SkillServiceImpl  implements SkillService{
 	SkillRepository skillRepository;
 	
 	@Override
-	public Skill getSkillByName(Long  employeeId,Pageable pageable,String name) {
-		List<Skill> skillList = skillRepository.findByContactId(employeeId, pageable).getContent();
+	public Skill getSkillByName(Long  ContactId,Pageable pageable,String name) {
+		List<Skill> skillList = skillRepository.findByContactId(ContactId, pageable).getContent();
 		for(Skill skill : skillList){
 		if(name.compareTo(skill.getName()) ==0){
 			return skill;
@@ -32,8 +32,8 @@ public class SkillServiceImpl  implements SkillService{
 	}
 
 	@Override
-	public Page<Skill> getAllSkills(Long  employeeId,Pageable pageable) {
-		return skillRepository.findByContactId(employeeId, pageable);	
+	public Page<Skill> getAllSkills(Long  ContactId,Pageable pageable) {
+		return skillRepository.findByContactId(ContactId, pageable);	
 	}
 
 	@Override

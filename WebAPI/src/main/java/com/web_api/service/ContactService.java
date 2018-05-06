@@ -13,7 +13,7 @@ public interface ContactService {
 	
 	Page<Contact> getAllContact(Pageable pageable);
 	
-	void saveContact(Contact employee);
+	void saveContact(Contact contact);
 	
-	void updateContact(Contact employee);
+	void updateContact(Contact contact);
 }

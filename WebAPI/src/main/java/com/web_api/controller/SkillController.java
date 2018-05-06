@@ -51,8 +51,8 @@ public class SkillController {
 		}
 	)
 	@RequestMapping(value ="/contact/{id}/skills", method = RequestMethod.GET)
-	public Page<Skill> getSkills(@PathVariable (value = "id") Long employeeId, Pageable pageable){
-		return skillServiceImpl.getAllSkills(employeeId, pageable);
+	public Page<Skill> getSkills(@PathVariable (value = "id") Long ContactId, Pageable pageable){
+		return skillServiceImpl.getAllSkills(ContactId, pageable);
 	}
 	
 	@ApiOperation(value = "Creates new skill",notes = "Skil contains name and level:{JUNIOR, INTERMEDIATE, SENIOR}")
@@ -62,14 +62,14 @@ public class SkillController {
 		}
 	)
 	@RequestMapping(value ="/contact/{id}/skills", method = RequestMethod.POST)
-	public ResponseEntity<?> createSkill(@PathVariable (value = "id") Long emplyeeId,
+	public ResponseEntity<?> createSkill(@PathVariable (value = "id") Long contactId,
             @Valid @RequestBody Skill skill,UriComponentsBuilder ucBuilder, Pageable pageable){
 		logger.info("Creating skill: {}",skill);
-		if(skillServiceImpl.getSkillByName(emplyeeId, pageable, skill.getName())!=null){
+		if(skillServiceImpl.getSkillByName(contactId, pageable, skill.getName())!=null){
 			return new ResponseEntity<>(new CustomErrorType("Unable to add. skill " + skill.getName() + " already exist"),
             HttpStatus.FOUND);
 		}else{
-			skill.setEmployee(contactServiceImpl.getContactById(emplyeeId));
+			skill.setContact(contactServiceImpl.getContactById(contactId));
 			skillServiceImpl.saveSkill(skill);
 			HttpHeaders headers = new HttpHeaders();
 			headers.setLocation(ucBuilder.path("/api/contact/{id}/skills").buildAndExpand(skill.getId()).toUri());

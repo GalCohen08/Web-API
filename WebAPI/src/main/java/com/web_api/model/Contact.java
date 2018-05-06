@@ -33,7 +33,7 @@ public class Contact {
 	@ApiModelProperty(notes = "Contact Mobile Phone Number")
 	private String  mobileNumber;
 	@ApiModelProperty(notes = "Contact skills [name:String, Level:{JUNIOR,INTERMEDIATE, SENIOR}]")
-	@OneToMany(mappedBy = "employee")
+	@OneToMany(mappedBy = "contact")
 	private Set<Skill> skills = new HashSet<Skill>();
 	
 	public Contact() {

@@ -6,9 +6,9 @@ import org.springframework.data.domain.Pageable;
 import com.web_api.model.Skill;
 
 public interface SkillService {
-	Skill getSkillByName(Long  employeeId,Pageable pageable,String name);
+	Skill getSkillByName(Long  ContactId,Pageable pageable,String name);
 	
-	Page<Skill> getAllSkills(Long  employeeId,Pageable pageable);
+	Page<Skill> getAllSkills(Long  ContactId,Pageable pageable);
 	
 	Skill saveSkill(Skill Skill);
 		

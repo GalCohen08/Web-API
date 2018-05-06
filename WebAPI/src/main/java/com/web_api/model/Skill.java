@@ -72,11 +72,11 @@ public class Skill {
 		this.level = level;
 	}
 
-	public Contact getEmployee() {
+	public Contact getContact() {
 		return contact;
 	}
 
-	public void setEmployee(Contact employee) {
-		this.contact = employee;
+	public void setContact(Contact contact) {
+		this.contact = contact;
 	}	
 }
