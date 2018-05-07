@@ -23,7 +23,6 @@ import com.web_api.service.ContactService;
 import com.web_api.utils.CustomErrorType;
 
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
