@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -26,6 +27,7 @@ public class Skill {
 	@ApiModelProperty(notes = "The database generated skill ID")
 	private long id;
 	@ApiModelProperty(notes = "Skill name")
+	@NotEmpty(message = "name must not be empty")
 	private String name;
 	@ApiModelProperty(notes = "Skill Level:{JUNIOR, INTERMEDIATE, SENIOR}")
 	@Enumerated(EnumType.STRING)
