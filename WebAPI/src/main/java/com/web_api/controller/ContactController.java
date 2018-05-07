@@ -23,7 +23,9 @@ import com.web_api.service.ContactService;
 import com.web_api.utils.CustomErrorType;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
@@ -61,9 +63,8 @@ public class ContactController {
 		    @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
 		}
 	)
-	
 	@RequestMapping(value = "/contact/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> getContact(@PathVariable("id") long id){
+	public ResponseEntity<?> getContact(@ApiParam(value = "Contact Id")@PathVariable("id") long id){
 		logger.info("Fetching Employee with id {}", id);
 		Contact contact =  contactService.getContactById(id);
 		if(contact == null){
@@ -80,7 +81,7 @@ public class ContactController {
 		}
 	)
 	@RequestMapping(value = "/contact/{id}",method = RequestMethod.DELETE)
-	public ResponseEntity<?> deleteContact(@PathVariable("id") long id){
+	public ResponseEntity<?> deleteContact(@ApiParam(value = "Contact Id")@PathVariable("id") long id){
 		logger.info("Fetching & Deleting User with id {}", id);
 		Contact contact = contactService.getContactById(id);
 		if(contact == null){
@@ -92,15 +93,21 @@ public class ContactController {
 		return new ResponseEntity<Contact>(HttpStatus.NO_CONTENT);
 	}
 	
-	@ApiOperation(value = "Creates new contact",notes = "Contact contains ,firstName, lastName, fullName, address, eMaill, mobileNumber")
+	@ApiOperation(value = "Creates new contact",notes = "Contact contains firstName, lastName, address, email, mobileNumber")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Contact Has been Successfully created"),
 		    @ApiResponse(code = 404, message = "Failed to create a new contact")
 		}
 	)
 	@RequestMapping(value = "/contact/", method = RequestMethod.POST)
-	public ResponseEntity<?> createContact(@Valid @RequestBody Contact contact, UriComponentsBuilder ucBuilder){
+	public ResponseEntity<?> createContact(@Valid @ApiParam(value = "Creates new contact (firstName, lastName, address, eMaill, mobileNumber)")@RequestBody Contact contact, UriComponentsBuilder ucBuilder){
 		logger.info("Creating Employee: {}",contact);
+		if(contactService.getContactByEmail( contact.getEmail())!=null){
+			return new ResponseEntity<>(new CustomErrorType("Unable to add contact. contact with Email " + contact.getEmail() + "is already exist"),HttpStatus.FOUND);
+		}
+		if(contactService.getContactByPhone(contact.getMobileNumber())!=null){
+			return new ResponseEntity<>(new CustomErrorType("Unable to add contact. contact with Mobile Number " + contact.getMobileNumber() + "is already exist"),HttpStatus.FOUND);
+		}
 		contactService.saveContact(contact);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("/api/contact/{id}").buildAndExpand(contact.getId()).toUri());
@@ -115,7 +122,7 @@ public class ContactController {
 		}
 	)
     @RequestMapping(value = "/contact/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<?> updateContact(@PathVariable("id") long id,@Valid @RequestBody Contact contact) {
+    public ResponseEntity<?> updateContact(@ApiParam(value = "Contact Id")@PathVariable("id") long id, @ApiParam(value = "Updates one field or more", required = true) @RequestBody Contact contact) {
         logger.info("Updating Contact with id {}", id);
         Contact currentContact = contactService.getContactById(id);
         if (currentContact == null) {

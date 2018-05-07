@@ -9,10 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
-import javax.xml.bind.annotation.XmlAccessorType;
 
 import io.swagger.annotations.ApiModelProperty;
 
@@ -22,7 +20,7 @@ public class Contact {
 	@Id 
 	@GeneratedValue
 	@Column(name = "contact_id")
-	@ApiModelProperty(notes = "The database generated contact ID")
+	@ApiModelProperty(value ="my ID",notes = "The database generated contact ID")
 	private Long id;
 	
 	@ApiModelProperty(notes = "Contact first name")

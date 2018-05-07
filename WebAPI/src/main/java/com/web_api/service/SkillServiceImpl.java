@@ -19,9 +19,9 @@ public class SkillServiceImpl  implements SkillService{
 	public Skill getSkillByName(Long  ContactId,Pageable pageable,String name) {
 		List<Skill> skillList = skillRepository.findByContactId(ContactId, pageable).getContent();
 		for(Skill skill : skillList){
-		if(name.compareTo(skill.getName()) ==0){
-			return skill;
-		}
+			if(name.compareTo(skill.getName()) ==0){
+				return skill;
+			}
 	}
 	return null;
 	}

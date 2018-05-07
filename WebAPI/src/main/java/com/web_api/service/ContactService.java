@@ -16,4 +16,8 @@ public interface ContactService {
 	void saveContact(Contact contact);
 	
 	void updateContact(Contact contact);
+	
+	public Contact getContactByEmail(String email);
+	
+	public Contact getContactByPhone(String phone);
 }

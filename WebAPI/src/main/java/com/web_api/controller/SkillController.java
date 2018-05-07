@@ -25,6 +25,7 @@ import com.web_api.utils.CustomErrorType;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
@@ -51,7 +52,7 @@ public class SkillController {
 		}
 	)
 	@RequestMapping(value ="/contact/{id}/skills", method = RequestMethod.GET)
-	public Page<Skill> getSkills(@PathVariable (value = "id") Long ContactId, Pageable pageable){
+	public Page<Skill> getSkills(@ApiParam(value = "Contact Id")@PathVariable (value = "id") Long ContactId, Pageable pageable){
 		return skillServiceImpl.getAllSkills(ContactId, pageable);
 	}
 	
@@ -62,8 +63,8 @@ public class SkillController {
 		}
 	)
 	@RequestMapping(value ="/contact/{id}/skills", method = RequestMethod.POST)
-	public ResponseEntity<?> createSkill(@PathVariable (value = "id") Long contactId,
-            @Valid @RequestBody Skill skill,UriComponentsBuilder ucBuilder, Pageable pageable){
+	public ResponseEntity<?> createSkill(@ApiParam(value = "Contact Id")@PathVariable (value = "id") Long contactId,
+            @Valid @ApiParam(value = "name AND level:{JUNIOR, INTERMEDIATE, SENIOR}")@RequestBody Skill skill,UriComponentsBuilder ucBuilder, Pageable pageable){
 		logger.info("Creating skill: {}",skill);
 		if(skillServiceImpl.getSkillByName(contactId, pageable, skill.getName())!=null){
 			return new ResponseEntity<>(new CustomErrorType("Unable to add. skill " + skill.getName() + " already exist"),
@@ -86,7 +87,7 @@ public class SkillController {
 		}
 	)
 	@RequestMapping(value = "/contact/{id}/skills/{name}", method = RequestMethod.GET)
-	public ResponseEntity<?> getSkill(@PathVariable("id") long id,@PathVariable("name") String name,Pageable pageable){
+	public ResponseEntity<?> getSkill(@ApiParam(value = "Contact Id")@PathVariable("id") long id,@ApiParam(value = "Skill Name")@PathVariable("name") String name,Pageable pageable){
 		logger.info("Fetching Skill with id {}", id);
 		Skill skill =  skillServiceImpl.getSkillByName(id, pageable, name);
 		if(skill == null){
@@ -103,7 +104,7 @@ public class SkillController {
 		}
 	)
 	@RequestMapping(value = "/contact/{id}/skills/{name}",method = RequestMethod.DELETE)
-	public ResponseEntity<?> deleteSkill(@PathVariable("id") long id,@PathVariable("name")String name, Pageable pageable){
+	public ResponseEntity<?> deleteSkill(@ApiParam(value = "Contact Id")@PathVariable("id") long id,@ApiParam(value = "Skill Name")@PathVariable("name")String name, Pageable pageable){
 		logger.info("Fetching & Deleting skills from Contact id: {} and skill name:{}", id,name);
 		Skill skill =  skillServiceImpl.getSkillByName(id, pageable, name);
 		if(skill == null){
@@ -122,7 +123,7 @@ public class SkillController {
 		}
 	)
     @RequestMapping(value = "/contact/{id}/skills/{name}", method = RequestMethod.PUT)
-    public ResponseEntity<?> updateSkill(@PathVariable("id") long id, @RequestBody Skill skill, @PathVariable("name")String name, Pageable pageable) {
+    public ResponseEntity<?> updateSkill(@ApiParam(value = "Contact Id")@PathVariable("id") long id,@ApiParam(value = "name OR level:{JUNIOR, INTERMEDIATE, SENIOR}")@RequestBody Skill skill, @ApiParam(value = "Skill Name")@PathVariable("name")String name, Pageable pageable) {
         logger.info("Updating Skill from Contact id: {} and skill name:{}", id,name);
         Skill currentSkill =  skillServiceImpl.getSkillByName(id, pageable, name);
         if (currentSkill == null) {
