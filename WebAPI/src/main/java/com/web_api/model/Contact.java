@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
+import javax.xml.bind.annotation.XmlAccessorType;
 
 import io.swagger.annotations.ApiModelProperty;
 
@@ -34,11 +35,9 @@ public class Contact {
 	private String fullName;
 	@ApiModelProperty(notes = "Contact address")
 	private String address;
-	
-	@ApiModelProperty(notes = "Contact E-Maill")
-    @NotEmpty(message = "email must not be empty")
-    @Email(message = "email should be a valid email")
-	private String eMaill;
+	@NotEmpty(message = "Email must not be empty")
+	@ApiModelProperty(notes = "Contact E-Mail")
+	private String email;
 	
 	@ApiModelProperty(notes = "Contact Mobile Phone Number")
 	@Pattern(regexp="(^$|[0-9]{10})",message = "Mobile Phone must be valid (10 digits)")
@@ -51,13 +50,13 @@ public class Contact {
 		super();
 	}
 	
-	public Contact(String name, String lastName, String address, String eMaill, String  mobileNumber) {
+	public Contact(String name, String lastName, String address, String email, String  mobileNumber) {
 		super();
 		this.firstName = name;
 		this.lastName = lastName;
 		this.fullName = firstName+" "+lastName;
 		this.address = address;
-		this.eMaill = eMaill;
+		this.email = email;
 		this.mobileNumber = mobileNumber;
 	}
 
@@ -93,12 +92,12 @@ public class Contact {
 		this.address = address;
 	}
 
-	public String geteMaill() {
-		return eMaill;
+	public String getEmail() {
+		return email;
 	}
 
-	public void seteMaill(String eMaill) {
-		this.eMaill = eMaill;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getMobileNumber() {

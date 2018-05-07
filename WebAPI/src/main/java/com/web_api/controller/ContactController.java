@@ -126,8 +126,8 @@ public class ContactController {
         if(contact.getAddress() != null){
         	currentContact.setAddress(contact.getAddress());
         }
-        if(contact.geteMaill() != null){
-        	currentContact.seteMaill(contact.geteMaill());
+        if(contact.getEmail() != null){
+        	currentContact.setEmail(contact.getEmail());
         }
         if(contact.getFirstName() !=null){
         	currentContact.setFirstName(contact.getFirstName());
