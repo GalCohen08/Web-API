@@ -32,7 +32,6 @@ public class Skill {
 	@ApiModelProperty(notes = "Skill Level:{JUNIOR, INTERMEDIATE, SENIOR}")
 	@Enumerated(EnumType.STRING)
 	private Level level;
-	
 	@ManyToOne
 	@JoinColumn (name="contact_id")
 	@JsonBackReference

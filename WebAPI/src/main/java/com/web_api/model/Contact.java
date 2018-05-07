@@ -22,7 +22,6 @@ public class Contact {
 	@Column(name = "contact_id")
 	@ApiModelProperty(value ="my ID",notes = "The database generated contact ID")
 	private Long id;
-	
 	@ApiModelProperty(notes = "Contact first name")
 	@NotEmpty(message = "first name must not be empty")
 	private String firstName;
@@ -36,7 +35,6 @@ public class Contact {
 	@NotEmpty(message = "Email must not be empty")
 	@ApiModelProperty(notes = "Contact E-Mail")
 	private String email;
-	
 	@ApiModelProperty(notes = "Contact Mobile Phone Number")
 	@Pattern(regexp="(^$|[0-9]{10})",message = "Mobile Phone must be valid (10 digits)")
 	private String  mobileNumber;
