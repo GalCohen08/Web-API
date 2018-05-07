@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 import io.swagger.annotations.ApiModelProperty;
 
@@ -18,19 +20,23 @@ public class Contact {
 	@Id 
 	@GeneratedValue
 	@Column(name = "contact_id")
-	@ApiModelProperty(notes = "The database generated contact ID")
+	@ApiModelProperty(value ="my ID",notes = "The database generated contact ID")
 	private Long id;
 	@ApiModelProperty(notes = "Contact first name")
+	@NotEmpty(message = "first name must not be empty")
 	private String firstName;
 	@ApiModelProperty(notes = "Contact last name")
+	@NotEmpty(message = "last name must not be empty")
 	private String lastName;
 	@ApiModelProperty(notes = "Contact fullName, (firstName+lastName)")
 	private String fullName;
 	@ApiModelProperty(notes = "Contact address")
 	private String address;
-	@ApiModelProperty(notes = "Contact E-Maill")
-	private String eMaill;
+	@NotEmpty(message = "Email must not be empty")
+	@ApiModelProperty(notes = "Contact E-Mail")
+	private String email;
 	@ApiModelProperty(notes = "Contact Mobile Phone Number")
+	@Pattern(regexp="(^$|[0-9]{10})",message = "Mobile Phone must be valid (10 digits)")
 	private String  mobileNumber;
 	@ApiModelProperty(notes = "Contact skills [name:String, Level:{JUNIOR,INTERMEDIATE, SENIOR}]")
 	@OneToMany(mappedBy = "contact")
@@ -40,13 +46,13 @@ public class Contact {
 		super();
 	}
 	
-	public Contact(String name, String lastName, String address, String eMaill, String  mobileNumber) {
+	public Contact(String name, String lastName, String address, String email, String  mobileNumber) {
 		super();
 		this.firstName = name;
 		this.lastName = lastName;
 		this.fullName = firstName+" "+lastName;
 		this.address = address;
-		this.eMaill = eMaill;
+		this.email = email;
 		this.mobileNumber = mobileNumber;
 	}
 
@@ -82,12 +88,12 @@ public class Contact {
 		this.address = address;
 	}
 
-	public String geteMaill() {
-		return eMaill;
+	public String getEmail() {
+		return email;
 	}
 
-	public void seteMaill(String eMaill) {
-		this.eMaill = eMaill;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getMobileNumber() {

@@ -1,5 +1,7 @@
 package com.web_api.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -48,6 +50,28 @@ public class ContactServiceImpl implements ContactService{
 	public Page<Contact> getAllContact(Pageable pageable) {
 		return contactRepository.findAll(pageable);
 	} 
+	
+	@Override
+	public Contact getContactByEmail(String email) {
+		List<Contact> contactlList = contactRepository.findAll();
+		for(Contact contact : contactlList){
+			if(email.compareTo(contact.getEmail()) ==0){
+				return contact;
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	public Contact getContactByPhone(String phone) {
+		List<Contact> contactlList = contactRepository.findAll();
+		for(Contact contact : contactlList){
+			if(phone.compareTo(contact.getMobileNumber()) ==0){
+				return contact;
+			}
+		}
+		return null;
+	}
 	
 
 
