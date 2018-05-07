@@ -8,7 +8,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.web_api.model.Contact;
-import com.web_api.model.Skill;
 import com.web_api.repository.ContactRepository;
 
 import javassist.NotFoundException;
